@@ -1,0 +1,58 @@
+@model string[]
+@{
+    ViewData["Title"] = "Add Event";
+}
+
+<div class="container-sm">
+    <h3>Enter your event details:</h3>
+    <form id="setupForm" action="AddEvent" method="post" name="AddEvent">
+        <input type="hidden" name="LineNum" value="1" />
+        <fieldset>
+            <legend class="text-primary">Event details:</legend>
+            <div class="mb-3">
+                <label for="EventName" class="form-label">Event Name:</label>
+                <input type="text" class="form-control" id="EventName" placeholder="Enter the event name" name="EventName" required>
+            </div>
+            <div class="mb-3">
+                <label for="dtEvent" class="form-label">Event Date:</label>
+                <input type="date" class="form-control" id="dtEvent" placeholder="Enter the event date" name="dtEvent" value='@Model[0]' required>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-primary">Does this event repeat?</legend>
+            <div class="mb-3">
+                <label for="Repeats" class="form-label">Does this event repeat?</label>
+                <label><input type="radio" id="none" name="Repeats" value="False" checked="checked"> No</label>
+                <label><input type="radio" id="some" name="Repeats" value="True"> Yes</label>
+            </div>
+            <div class="mb-3">
+                <label for="RepeatBlock" class="form-label">How often does this event repeat?</label>
+                <label><input type="radio" id="none" name="RepeatBlock" value="day" checked="checked"> Every x Days</label>
+                <label><input type="radio" id="some" name="RepeatBlock" value="month"> Every x Months</label>
+                <label><input type="radio" id="some" name="RepeatBlock" value="year"> Every Year</label>
+            </div>
+            <div class="mb-3">
+                <label for="RepeatFreq" class="form-label">How often does this event repeat?</label>
+                <input type="text" class="form-control" id="RepeatFreq" placeholder="Enter the frequency in days" name="RepeatFreq">
+            </div>
+            <div class="mb-3">
+                <label for="RepeatTag" class="form-label">Should there be an anniversary tag (for yearly repeating)?</label>
+                <label><input type="radio" id="none" name="RepeatTag" value="True" checked="checked"> Yes</label>
+                <label><input type="radio" id="some" name="RepeatTag" value="False"> No</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-primary">Is there an alarm?</legend>
+            <div class="mb-3">
+                <label for="Alarm" class="form-label">Do you want an alarm this this event?</label>
+                <label><input type="radio" id="none" name="Alarm" value="False" checked="checked"> No</label>
+                <label><input type="radio" id="some" name="Alarm" value="True"> Yes</label>
+            </div>
+            <div class="mb-3">
+                <label for="dtAlarm" class="form-label">Alarm Date and Time:</label>
+                <input type="datetime-local" class="form-control" id="dtAlarm" placeholder="Enter the event date" name="dtAlarm">
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Save Event</button>
+    </form>
+</div>

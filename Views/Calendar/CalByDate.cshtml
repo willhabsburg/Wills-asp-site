@@ -1,0 +1,45 @@
+@model string[,]
+@{
+    ViewData["Title"] = @Model[42,0];
+}
+
+<section class="row"><!-- class="text-center">-->
+    <div class="col-9">
+        <div class="row">
+            <div class="col">
+                <h2>@Model[42,0]</h2>
+            </div>
+            <div class="col">
+                <h2 class="rAlign">
+                    <a id="addEventLink" href="/Calendar/AddEvent">Add Event</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a id="prevMonth" href="/Calendar/CalByDate?newDate=@Model[43,0]">&lt;Prev</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a id="nextMonth" href="/Calendar/CalByDate?newDate=@Model[44,0]">Next&gt;</a>
+                </h2>
+            </div>
+        </div>
+        
+        <table>
+            <thead><tr>
+                @foreach(string s in ThisMonth.dowNames) {
+                    <th class="text-center">@s</th>
+                }
+            </tr></thead>
+            <tbody>
+            @for(var i = 0; i < 6; i++) {
+                <tr class="tData">
+                @for(var j = 0; j < 7; j++) {
+                    var day = i * 7 + j;
+                    <td class='@{
+                        if(Model[day,1]==Model[45,0]) Write("today");
+                    }' id='@Model[day,1]'>@Model[day,0]</td>
+                }
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-3">
+        <h4 class="text-center">Your Day</h4>
+    </div>
+</section>
+<script src="~/js/calendar.js" asp-append-version="true"></script>

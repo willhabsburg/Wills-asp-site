@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Home";
+}
+@model string[]
+
+<section class="row"><!-- class="text-center">-->
+    <div class="col-9">
+        <div class="row">
+            <div class="col">
+                <h2>@Model[42]</h2>
+            </div>
+            <div class="col">
+                <h2 class="rAlign"><a href="/Calendar/CalByDate?newDate=@Model[43]"><</a> <a href="/Calendar/CalByDate?newDate=@Model[44]">></a></h2>
+            </div>
+        </div>
+        
+        <table>
+            <thead><tr>
+                @foreach(string s in ThisMonth.dowNames) {
+                    <th class="text-center">@s</th>
+                }
+            </tr></thead>
+            <tbody>
+            @for(var i = 0; i < 6; i++) {
+                <tr class="tData">
+                @for(var j = 0; j < 7; j++) {
+                    var day = i * 7 + j;
+                    <td>@Model[day]</td>
+                }
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-3">
+        <h4 class="text-center">Your Day</h4>
+    </div>
+</section>

@@ -1,0 +1,4 @@
+{"LineNum":1,"dtEvent":"1971-02-25T00:00:00","EventName":"Will\u0027s B\u0027day (51)","Repeats":true,"RepeatBlock":"year","RepeatFreq":1,"RepeatTag":true,"Alarm":false,"dtAlarm":null}
+{"LineNum":1,"dtEvent":"2022-05-01T00:00:00","EventName":"May Day","Repeats":true,"RepeatBlock":"year","RepeatFreq":1,"RepeatTag":false,"Alarm":false,"dtAlarm":null}
+{"LineNum":1,"dtEvent":"2022-05-05T00:00:00","EventName":"Cinqo de Mayo","Repeats":true,"RepeatBlock":"year","RepeatFreq":1,"RepeatTag":false,"Alarm":false,"dtAlarm":null}
+{"LineNum":1,"dtEvent":"2022-01-01T00:00:00","EventName":"New Year\u0027s Day","Repeats":true,"RepeatBlock":"year","RepeatFreq":1,"RepeatTag":false,"Alarm":false,"dtAlarm":null}

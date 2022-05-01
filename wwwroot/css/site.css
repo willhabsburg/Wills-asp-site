@@ -1,0 +1,51 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table th, table td {
+  width: 250px;
+  border: 1px solid black;
+}
+
+table td {
+  vertical-align: top;
+}
+
+table th {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.rAlign {
+  text-align: right;
+}
+
+.rAlign a {
+  text-decoration: none;
+}
+
+.today {
+  background-color: lightblue;
+}
+
+input[type="radio"] {
+  margin-left: 20px;
+}

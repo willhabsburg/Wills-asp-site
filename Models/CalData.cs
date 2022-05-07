@@ -11,8 +11,6 @@ namespace WillCal.Models
         public bool RepeatTag { get; set; } = true;
         public bool Alarm { get; set; } = false;
         public DateTime? dtAlarm { get; set; } = null;
-
-        
         
     }
 }

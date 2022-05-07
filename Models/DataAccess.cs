@@ -8,13 +8,12 @@ namespace WillCal.Models
         private static List<CalData> willcal = new List<CalData>();
 
         public DataAccess() {
-            DataAccess.LoadData();
         //    CalData tmp = new CalData();
         //    tmp.LineNum = 1;
         //    tmp.EventName = "test";
         //    tmp.dtEvent = new DateTime(2022, 04, 30);
         //    willcal.Add(tmp);
-            
+            DataAccess.LoadData();
         }
 
         public static string toJSON() {
@@ -30,16 +29,11 @@ namespace WillCal.Models
             willcal.Clear();
             foreach(string s in JSONData) {
                 if(s.Length > 4) {
-                    Console.WriteLine(s);
                     CalData? newCalData = JsonSerializer.Deserialize<CalData>(s)!;
                     if(newCalData != null)
                         willcal.Add(newCalData);
                 }
             }
-        }
-
-        public static List<CalData> GetCalandar() {
-            return willcal;
         }
 
         public static List<CalData> GetEventsByDate(DateTime dt) {
@@ -67,11 +61,11 @@ namespace WillCal.Models
         }
 
         public static async void SaveData() {
-            await File.WriteAllTextAsync("calendar.dat", toJSON());
+            await File.WriteAllTextAsync("./calendar.dat", toJSON());
         }
 
         public static void LoadData() {
-            string tmp = File.ReadAllText("calendar.dat");
+            string tmp = File.ReadAllText("./calendar.dat");
             fromJSON(tmp);
         }
 

@@ -7,8 +7,6 @@ namespace WillCal.Models
         public static DateTime prevMonth;
         public static DateTime currdate = DateTime.Today;
         public static DataAccess da = new DataAccess();
-        private static string[,] monthText = new string[46,2];
-        private static TimeSpan oneDay = new TimeSpan(1, 0, 0, 0);
         public static string[] dowNames = new string[] {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         public static string[] monthNames = new string[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         public static int[] lastDayOfMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -56,22 +54,24 @@ namespace WillCal.Models
             DateTime startDate = (new DateTime(thisMonth.Year, thisMonth.Month, 1)) - new TimeSpan(fdotm, 0, 0, 0);
             for(int i = 0; i < 42; i++) {
                 List<CalData> thisDayEvents = DataAccess.GetEventsByDate(startDate);
-                monthText[i,0] = startNumber++.ToString() + " - ";
-                monthText[i,1] = startDate.ToString("yyyyMMdd");
+                CalModelView.calText[i,0] = startNumber++.ToString() + " - ";
+                CalModelView.calText[i,1] = startDate.ToString("yyyyMMdd");
                 foreach(CalData cd in thisDayEvents) {
-                    monthText[i,0] += cd.EventName + " / ";
+                    CalModelView.calText[i,0] += cd.EventName + " / ";
                 }
-                monthText[i,0] = monthText[i,0].Substring(0, monthText[i,0].Length - 3);
+                CalModelView.calText[i,0] = CalModelView.calText[i,0].Substring(0, CalModelView.calText[i,0].Length - 3);
                 startDate = startDate.Add(new TimeSpan(1,0,0,0));
                 if(startNumber > ldolm && i < 10)
                     startNumber = 1;
                 if(startNumber > ldotm && i > 10)
                     startNumber = 1;
             }
-            monthText[42,0] = thisMonth.ToString("Y");
-            monthText[43,0] = prevMonth.ToString("yyyyMM");
-            monthText[44,0] = nextMonth.ToString("yyyyMM");
-            monthText[45,0] = currdate.ToString("yyyyMMdd");
+            CalModelView.titleText = thisMonth.ToString("Y");
+            CalModelView.thisMonth = thisMonth.ToString("yyyyMM");
+            CalModelView.prevMonth = prevMonth.ToString("yyyyMM");
+            CalModelView.nextMonth = nextMonth.ToString("yyyyMM");
+            CalModelView.currDate = currdate.ToString("yyyyMMdd");
+            TaskAccess.LoadData();
         }
 
         public static int LastDayOfMonth(DateTime dateToCheck) {
@@ -81,8 +81,8 @@ namespace WillCal.Models
             return tmp.Day;
         }
 
-        public static string[,] getMonthText() {
-            return monthText;
+        public static void getMonthText() {
+            return;
         }
     }
 }

@@ -18,20 +18,36 @@ public class CalendarController : Controller
         Response.Redirect("/Calendar/CalByDate");
     }
 
+    public IActionResult AddTask() {
+        return View(TaskAccess.getCurrentTask());
+    }
+    
+    [HttpPost]
+    public void AddTask(TaskData data) {
+        Console.WriteLine("sdsdfafasdf");
+        TaskAccess.AddEvent(data);
+        Response.Redirect("/Calendar/CalByDate");
+    }
+
     public IActionResult CalByDate(string? newDate) {
         ThisMonth.CalByMonth(newDate);
-        return View(ThisMonth.getMonthText());
+        return View();
+    }
+
+    public IActionResult CalWeek(string? newDate) {
+        ThisWeek.CalByWeek(newDate);
+        return View();
     }
 
     [HttpGet]
     public IActionResult AddEvent(string? selDate) {
+        string[] tmp;
         if(selDate == null)
-            return View();
+            tmp = new string[] {DateTime.Today.ToString("d")};
         else {
-            string[] tmp = new string[] {selDate.Substring(0,4) + "-" + selDate.Substring(4,2) + "-" + selDate.Substring(6,2), ""};
-            //Console.WriteLine(tmp);
-            return View(tmp);
+            tmp = new string[] {selDate.Substring(0,4) + "-" + selDate.Substring(4,2) + "-" + selDate.Substring(6,2), ""};
         }
+        return View(tmp);
     }
 
     [HttpPost]

@@ -15,23 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View(ThisMonth.getMonthText());
-    }
-
-    public IActionResult CalByDate(string? newDate) {
-        ThisMonth.CalByMonth(newDate);
-        return View(ThisMonth.getMonthText());
-    }
-
-    [HttpGet]
-    public IActionResult AddEvent() {
         return View();
-    }
-
-    [HttpPost]
-    public void AddEvent(CalData data) {
-        DataAccess.AddEvent(data);
-        Response.Redirect("/");
     }
 
     public IActionResult Privacy()

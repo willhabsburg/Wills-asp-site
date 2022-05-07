@@ -1,0 +1,53 @@
+@model string[]
+@{
+    ViewData["Title"] = "Add / Edit Event";
+}
+
+<div class="container-sm">
+    <h3>Enter your event details:</h3>
+    <form id="setupForm" action="AddTask" method="post" name="AddTask">
+        <input type="hidden" name="guid" value='@((Model != null && Model[0] != null)?(Model[0]):(new Guid()))' />
+        <fieldset>
+            <legend class="text-primary">Event details:</legend>
+            <div class="mb-3">
+                <label for="TaskName" class="form-label">Task Name:</label>
+                <input type="text" class="form-control" id="TaskName" placeholder="Enter the task name" name="TaskName" required value='@((Model != null)?(Model[1]):(""))'>
+            </div>
+            <div class="mb-3">
+                <label for="TaskDT" class="form-label">Event Due:</label>
+                <input type="datetime-local" class="form-control" id="TaskDT" placeholder="Enter the due date/time:" name="TaskDT" required value='@((Model != null)?(Model[2]):(DateTime.Today))' required>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-primary">Does this task repeat?</legend>
+            <div class="mb-3">
+                <label for="Repeats" class="form-label">Does this task repeat?</label>
+                <label><input type="radio" id="none" name="Repeats" value="False" checked='@((Model != null && Model[6] == "true")?("checked"):(""))'> No</label>
+                <label><input type="radio" id="some" name="Repeats" value="True" checked='@((Model != null && Model[6] == "false")?("checked"):(""))'> Yes</label>
+            </div>
+            <div class="mb-3">
+                <label for="RepeatBlock" class="form-label">How often does this task repeat?</label>
+                <label><input type="radio" id="none" name="RepeatBlock" value="day" checked='@((Model != null && Model[7] == "day")?("checked"):(""))'> Every x Days</label>
+                <label><input type="radio" id="some" name="RepeatBlock" value="month" checked='@((Model != null && Model[7] == "month")?("checked"):(""))'> Every x Months</label>
+                <label><input type="radio" id="some" name="RepeatBlock" value="year" checked='@((Model != null && Model[7] == "year")?("checked"):(""))'> Every Year</label>
+            </div>
+            <div class="mb-3">
+                <label for="RepeatFreq" class="form-label">How often does this task repeat?</label>
+                <input type="text" class="form-control" id="RepeatFreq" placeholder="Enter the frequency in days" name="RepeatFreq" value='@((Model != null)?(Model[8]):("7"))'>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-primary">Is this a sub-task?</legend>
+            <div class="mb-3">
+                <label for="parentGuid" class="form-label">Parent task:</label>
+                <select name="parentGuid" id="parentGuid">
+                    <option value='@((Model != null && Model[4] != "")?(Model[4]):(""))'>@((Model != null && Model[4] != "")?(Model[4]):(""))</option>
+                    @foreach(TaskData td in CalModelView.tasks) {
+                        <option value='@td.guid'>@td.TaskName (@td.TaskDT.ToString("yyyy-MM-dd"))</option>
+                    }
+                </select>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Save Event</button>
+    </form>
+</div>

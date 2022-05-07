@@ -1,0 +1,47 @@
+@model string[,]
+@{
+    ViewData["Title"] = @CalModelView.titleText;
+}
+
+<section class="row">
+    <div class="col-9">
+        <div class="row">
+            <div class="col">
+                <h2>@CalModelView.titleText</h2>
+            </div>
+            <div class="col">
+                <h2 class="rAlign">
+                    <a id="addEventLink" href="/Calendar/AddEvent">Add Event</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a id="prevMonth" href="/Calendar/CalWeek?newDate=@CalModelView.prevWeek">&lt;Prev</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a id="nextMonth" href="/Calendar/CalWeek?newDate=@CalModelView.nextWeek">Next&gt;</a>
+                </h2>
+            </div>
+        </div>
+        
+        <table>
+            <thead><tr>
+                @foreach(string s in ThisMonth.dowNames) {
+                    <th class="text-center">@s</th>
+                }
+            </tr></thead>
+            <tbody>
+                <tr class="">
+                @for(var j = 0; j < 7; j++) {
+                    <td class='tData weekTable' id='@CalModelView.calText[j,1]'>@CalModelView.calText[j,0]</td>
+                }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-3">
+        <h4 class="text-center">Your Day</h4>
+    </div>
+</section>
+
+@section CalNav {
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="CalByDate">Month View</a>
+    </li>
+}
+
+<script src="~/js/calendar.js" asp-append-version="true"></script>

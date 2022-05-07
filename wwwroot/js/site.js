@@ -13,7 +13,9 @@ window.addEventListener("resize", function(e) {
 function resize() {
     let w = window.innerWidth;
     let h = window.innerHeight;
-    $(".tData").css("width", (w - 25)/7);
-    $(".tData").css("height", (h - 225)/6);
-    
+    $(".tData").css("min-width", (w * 0.75)/7);
+    if(location.toString().indexOf("CalByDate") > 0)
+        $(".tData").css("height", (h - 225)/6);
+    else if(location.toString().indexOf("CalWeek") > 0)
+        $(".tData").css("height", (h - 225));
 }

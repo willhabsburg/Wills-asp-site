@@ -11,7 +11,12 @@ function tdclick(e) {
 
 function tablescroll(e) {
     let text = "";
-    let url = "/Calendar/CalByDate?newDate=";
+    console.log(location);
+    let url = "";
+    if(location.toString().indexOf("CalByDate") > 0)
+        url = "/Calendar/CalByDate?newDate=";
+    else if(location.toString().indexOf("CalWeek") > 0)
+    url = "/Calendar/CalWeek?newDate=";
     if(e.originalEvent.deltaY < 0) {
         text = $('#prevMonth').attr('href');
         location.replace(url + text.substring(text.length - 6, text.length));

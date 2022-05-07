@@ -22,7 +22,6 @@ table {
 }
 
 table th, table td {
-  width: 250px;
   border: 1px solid black;
 }
 
@@ -42,7 +41,12 @@ table th {
   text-decoration: none;
 }
 
-.today {
+.otherMonth {
+  background-color: #eee;
+  color: #222;
+}
+
+td.today {
   background-color: lightblue;
 }
 
